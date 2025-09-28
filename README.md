@@ -1,89 +1,97 @@
 # weekly-productivity
 Weekly Kanban Organizer - Personal productivity tool for programmers. Manage your coding learning, wellness, and workspace with color-coded areas and progress tracking.
 
-# 🚀 Blockchain Developer Productivity Suite
+weekly-productivity/
+├── README.md      
+├── index.html        
+└── LICENSE          
 
-> Personal productivity tools designed by a blockchain developer for efficient Web3 learning and project management
+# 📅 Weekly Productivity
+
+> Herramienta de productividad personal para programadores - Gestiona aprendizaje, bienestar y espacio de trabajo con un sistema visual Kanban
 
 ## 📋 Overview
 
-This repository contains custom-built productivity tools that I use in my blockchain development journey. From learning Ethereum and Solana to managing creative projects, these tools reflect my approach to organized, efficient development.
+Weekly Kanban Organizer diseñado para mantener el equilibrio entre el crecimiento profesional y el bienestar personal. Perfecto para programadores que quieren organizar su aprendizaje, cuidar su espacio de trabajo y mantener hábitos saludables.
 
 ## 🛠️ Tools Included
 
-### 1. Weekly Kanban Organizer
-- **Purpose**: Visual task management with time-blocking system
+### 1. Weekly Kanban Organizer ⭐ **HERRAMIENTA PRINCIPAL**
+- **Purpose**: Organizador visual semanal con sistema de bloques de tiempo
 - **Tech Stack**: HTML5, CSS3, Vanilla JavaScript
 - **Features**: 
-  - Color-coded categories (Focus, Creative, Personal, Movement)
-  - Local storage persistence
-  - Mobile-responsive design
-  - Print-friendly layout
-- **Live Demo**: [View Organizer](https://cristina-90.github.io/weekly-productivity/)
+  - 4 categorías por colores (Enfoque, Creativo, Personal, Movimiento)
+  - Persistencia con Local Storage
+  - Diseño responsive y mobile-friendly  
+  - Optimizado para impresión
+  - Sistema de prioridades semanales
+- **Live Demo**: [Ver Organizador](https://tu-usuario.github.io/weekly-productivity/)
 
-### 2. Learning Tracker (Coming Soon)
-- Smart contract progress tracking
-- Resource bookmarking
-- Code snippet manager
+### 2. Learning Progress Tracker (Próximamente)
+- Seguimiento de progreso en programación
+- Gestión de recursos y tutoriales
+- Métricas de aprendizaje
 
-### 3. Project Timer (Coming Soon)
-- Pomodoro technique for blockchain development
-- Deep work session tracking
-- Productivity analytics
+### 3. Focus Timer (Próximamente)  
+- Técnica Pomodoro personalizada
+- Tracking de sesiones de programación
+- Análisis de productividad
 
-## 🎯 Why This Matters
+## 🎯 Por Qué Esta Herramienta
 
-As a blockchain developer, I believe that **personal productivity systems are as important as clean code**. These tools represent:
+Como programador, creo que **la organización personal es tan importante como escribir código limpio**. Esta herramienta representa:
 
-- **Systems thinking**: Breaking complex learning into manageable blocks
-- **User-centered design**: Tools that actually get used daily
-- **Frontend skills**: Clean, functional interfaces without frameworks
-- **Problem-solving**: Custom solutions for personal workflow optimization
+- **Equilibrio vida-trabajo**: Balance entre crecimiento profesional y bienestar
+- **Sistemas efectivos**: Metodologías probadas (Kanban, time-blocking)
+- **Enfoque visual**: Interfaces que realmente se usan a diario
+- **Desarrollo frontend**: HTML/CSS/JS puro, sin dependencias
+- **Solución personalizada**: Adaptada a necesidades reales de programadores
 
-## 🔧 Technical Highlights
+## 🔧 Características Técnicas
 
-- **Pure vanilla JavaScript** - No dependencies, fast loading
-- **CSS Grid & Flexbox** - Modern layout techniques
-- **Local Storage API** - Data persistence without backend
-- **Responsive design** - Works on mobile and desktop
-- **Print optimization** - CSS media queries for physical planning
+- **JavaScript Vanilla** - Sin frameworks, carga rápida
+- **CSS Grid & Flexbox** - Layout moderno y responsive
+- **Local Storage API** - Persistencia de datos sin backend
+- **Mobile-first design** - Optimizado para móvil y desktop
+- **Print-friendly** - CSS media queries para planificación física
+- **Color-coded system** - UX intuitivo por categorías
 
-## 📱 Usage
+## 📱 Cómo Usar
 
-1. **Clone the repository**:
+1. **Clonar el repositorio**:
    ```bash
-   git clone https://github.com/Cristina-90/weekly-productivity.git
+   git clone https://github.com/tu-usuario/weekly-productivity.git
    ```
 
-2. **Open locally**:
-   - Navigate to the tool you want to use
-   - Open the HTML file in your browser
-   - Start organizing your blockchain learning journey!
+2. **Usar localmente**:
+   - Abrir `index.html` en tu navegador
+   - Marcar como favorito para acceso rápido
+   - ¡Empezar a organizar tu semana productiva!
 
-3. **Or use online**:
-   - Visit the GitHub Pages deployment
-   - Bookmark for daily use
+3. **O usar online**:
+   - Visitar: [weekly-productivity](https://tu-usuario.github.io/weekly-productivity/)
+   - Crear acceso directo en móvil/desktop
 
-## 🎨 Design Philosophy
+## 🎨 Filosofía de Diseño
 
-- **Minimalist**: Clean interfaces that don't distract from work
-- **Functional**: Every element serves a purpose
-- **Accessible**: Works for everyone, everywhere
-- **Personal**: Reflects my actual workflow and needs
+- **Minimalista**: Interfaces limpias que no distraen
+- **Funcional**: Cada elemento tiene un propósito específico
+- **Accesible**: Funciona para todos, en cualquier dispositivo
+- **Personal**: Refleja workflows reales de programadores
 
-## 📈 My Blockchain Learning Journey
+## 📈 Áreas de Enfoque
 
-These tools support my structured approach to mastering:
+Esta herramienta soporta un enfoque estructurado para:
 
-- **Ethereum development** (Solidity, Web3.js, Hardhat)
-- **Solana ecosystem** (Rust, Anchor framework)
-- **DeFi protocols** and smart contract security
-- **Frontend integration** with Web3 wallets
+- **🔵 Desarrollo técnico** (Programación, proyectos, aprendizaje)
+- **🟢 Creatividad y productividad** (Proyectos personales, diseño)
+- **🟠 Bienestar y espacio** (Cuidado personal, organización del hogar)
+- **🟣 Salud y movimiento** (Ejercicio, descanso activo)
 
 ## 🤝 Connect With Me
 
-- **Twitter**: https://x.com/ErgoMatch
 - **LinkedIn**: https://www.linkedin.com/in/cristina-cerezo-56540b67/
+- **Twitter**: https://x.com/ErgoMatch
 
 ## 📝 License
 
@@ -91,4 +99,4 @@ MIT License - Feel free to fork and adapt for your own productivity needs!
 
 ---
 
-*"Productivity isn't about doing more things - it's about doing the right things efficiently. These tools help me stay focused on what matters: becoming a skilled blockchain developer."*
+*"La productividad no se trata de hacer más cosas, sino de hacer las cosas correctas de manera eficiente. Esta herramienta me ayuda a mantener el enfoque en lo que importa: crecer como programador mientras cuido mi bienestar."*
