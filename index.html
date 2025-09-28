@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Organizador Semanal - Sistema de Bloques</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .priorities-section {
+            background: #f8f9ff;
+            padding: 25px;
+            border-bottom: 3px solid #e1e8ff;
+        }
+
+        .priorities-title {
+            font-size: 1.5em;
+            color: #4a5568;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .priority-input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 16px;
+            margin-bottom: 10px;
+            background: white;
+        }
+
+        .kanban-board {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+            padding: 30px;
+            background: #fafbfc;
+        }
+
+        .kanban-column {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            border-top: 5px solid;
+            transition: transform 0.3s ease;
+        }
+
+        .kanban-column:hover {
+            transform: translateY(-2px);
+        }
+
+        .focus-block {
+            border-top-color: #3182ce;
+        }
+
+        .creative-block {
+            border-top-color: #38a169;
+        }
+
+        .personal-block {
+            border-top-color: #dd6b20;
+        }
+
+        .movement-block {
+            border-top-color: #805ad5;
+        }
+
+        .column-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .column-icon {
+            font-size: 2em;
+            padding: 10px;
+            border-radius: 12px;
+            color: white;
+        }
+
+        .focus-block .column-icon {
+            background: #3182ce;
+        }
+
+        .creative-block .column-icon {
+            background: #38a169;
+        }
+
+        .personal-block .column-icon {
+            background: #dd6b20;
+        }
+
+        .movement-block .column-icon {
+            background: #805ad5;
+        }
+
+        .column-title {
+            flex: 1;
+        }
+
+        .column-title h3 {
+            font-size: 1.4em;
+            color: #2d3748;
+            margin-bottom: 5px;
+        }
+
+        .column-subtitle {
+            color: #718096;
+            font-size: 0.9em;
+        }
+
+        .task-list {
+            list-style: none;
+        }
+
+        .task-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 12px;
+            margin-bottom: 8px;
+            background: #f7fafc;
+            border-radius: 8px;
+            border-left: 4px solid;
+            transition: all 0.3s ease;
+        }
+
+        .focus-block .task-item {
+            border-left-color: #3182ce;
+        }
+
+        .creative-block .task-item {
+            border-left-color: #38a169;
+        }
+
+        .personal-block .task-item {
+            border-left-color: #dd6b20;
+        }
+
+        .movement-block .task-item {
+            border-left-color: #805ad5;
+        }
+
+        .task-checkbox {
+            width: 18px;
+            height: 18px;
+            margin-top: 2px;
+            cursor: pointer;
+        }
+
+        .task-text {
+            flex: 1;
+            font-size: 14px;
+            line-height: 1.4;
+            color: #4a5568;
+        }
+
+        .task-item:hover {
+            background: #edf2f7;
+            transform: translateX(5px);
+        }
+
+        .notes-section {
+            background: #fffbf0;
+            border-top: 3px solid #f6e05e;
+            padding: 20px;
+            margin-top: 10px;
+        }
+
+        .notes-title {
+            color: #744210;
+            font-weight: 600;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .notes-input {
+            width: 100%;
+            height: 80px;
+            padding: 12px;
+            border: 2px solid #f6e05e;
+            border-radius: 8px;
+            resize: vertical;
+            font-family: inherit;
+            font-size: 14px;
+        }
+
+        .week-navigation {
+            background: #e6fffa;
+            padding: 20px;
+            text-align: center;
+            border-top: 3px solid #38b2ac;
+        }
+
+        .week-nav-title {
+            color: #234e52;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .week-days {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .day-block {
+            background: white;
+            padding: 10px 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            min-width: 80px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .day-block:hover {
+            background: #38b2ac;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .day-name {
+            font-weight: 600;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .tips-section {
+            background: #f0fff4;
+            border-top: 3px solid #48bb78;
+            padding: 25px;
+        }
+
+        .tips-title {
+            color: #22543d;
+            font-size: 1.3em;
+            font-weight: 600;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+
+        .tip-card {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 4px solid #48bb78;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .tip-title {
+            font-weight: 600;
+            color: #22543d;
+            margin-bottom: 8px;
+        }
+
+        .tip-text {
+            font-size: 14px;
+            color: #4a5568;
+            line-height: 1.4;
+        }
+
+        @media (max-width: 768px) {
+            .kanban-board {
+                grid-template-columns: 1fr;
+                padding: 20px;
+                gap: 20px;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .week-days {
+                gap: 10px;
+            }
+            
+            .day-block {
+                min-width: 60px;
+                padding: 8px 12px;
+            }
+        }
+
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            
+            .container {
+                box-shadow: none;
+                border-radius: 0;
+            }
+            
+            .kanban-column:hover,
+            .task-item:hover,
+            .day-block:hover {
+                transform: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>🗂️ Organizador Semanal</h1>
+            <p>Sistema de Bloques - Semana del _____ al _____</p>
+        </div>
+
+        <!-- Prioridades de la Semana -->
+        <div class="priorities-section">
+            <div class="priorities-title">
+                🎯 Prioridades de la Semana
+            </div>
+            <input type="text" class="priority-input" placeholder="1. Meta principal de programación...">
+            <input type="text" class="priority-input" placeholder="2. Objetivo creativo/productivo...">
+            <input type="text" class="priority-input" placeholder="3. Meta de cuidado personal...">
+        </div>
+
+        <!-- Navegación Semanal -->
+        <div class="week-navigation">
+            <div class="week-nav-title">📅 Planificación por Días</div>
+            <div class="week-days">
+                <div class="day-block">
+                    <div class="day-name">Lun</div>
+                </div>
+                <div class="day-block">
+                    <div class="day-name">Mar</div>
+                </div>
+                <div class="day-block">
+                    <div class="day-name">Mié</div>
+                </div>
+                <div class="day-block">
+                    <div class="day-name">Jue</div>
+                </div>
+                <div class="day-block">
+                    <div class="day-name">Vie</div>
+                </div>
+                <div class="day-block">
+                    <div class="day-name">Sáb</div>
+                </div>
+                <div class="day-block">
+                    <div class="day-name">Dom</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tablero Kanban -->
+        <div class="kanban-board">
+            <!-- Bloque de Enfoque -->
+            <div class="kanban-column focus-block">
+                <div class="column-header">
+                    <div class="column-icon">💻</div>
+                    <div class="column-title">
+                        <h3>Bloque de Enfoque</h3>
+                        <div class="column-subtitle">Deep Work: 90 min | Meta: 1 bloque/día</div>
+                    </div>
+                </div>
+                <ul class="task-list">
+                    <li class="task-item">
+                        <input type="checkbox" class="task-checkbox">
+                        <div class="task-text">Configurar entorno de desarrollo Ethereum</div>
+                    </li>
+                    <li class="task-item">
+                        <input type="checkbox" class="task-checkbox">
+                        <div class="task-text">Crear primer smart contract básico</div>
+                    </li>
+                    <li class="task-item">
+                        <input type="checkbox" class="task-checkbox">
+                        <div class="task-text">Tutorial Solana: instalación y setup</div>
+                    </li>
+                    <li class="task-item">
+                        <input type="checkbox" class="task-checkbox">
+                        <div class="task-text">Práctica con Solidity - Variables y funciones</div>
+                    </li>
+                    <li class="task-item">
+                        <input type="checkbox" class="task-checkbox">
+                        <div class="task-text">Mini proyecto: Token simple en Ethereum</div>
+                    </li>
+                    <li class="task-item">
+                        <input type="checkbox" class="task-checkbox">
+                        <div class="task-text">Documentar aprendizajes del día</div>
+                    </li>
+                    <li class="task-item">
+                        <input type="checkbox" class="task-checkbox">
+                        <div class="task-text">Repasar conceptos clave (sábado)</div>
+                    </li>
+                </ul>
+                <div class="notes-section">
+                    <div class="notes-title">📝 Notas rápidas</div>
+                    <textarea class="notes-input" placeholder="Anota dudas, recursos útiles, ideas..."></textarea>
+                </div>
+            </div>
+
+            <!-- Bloque Creativo -->
+            <div class="kanban-column creative-block">
+                <div class="column-header">
+                    <div class="column-icon">🎨</div>
+                    <div class="column-title">
+                        <h3>Bloque Creativo</h3>
+                        <div class="column-subtitle">60-90 min | Meta: 3-4 bloques/semana</div>
+                    </div>
+                </div>
+                <ul class="task-list">
+                    <li class="task-item">
+                        <input type="checkbox" class="task-checkbox">
+                        <div class="task-text">Seleccionar fotos para el álbum (100-150 fotos)</div>
+                    </li>
+                    <li class="task-item">
+                        <input type="checkbox" class="task-checkbox">
+                        <div class="task-text">Elegir plataforma de impresión (Hofmann, Cewe, etc.)</div>
+                    </li>
+                    <li class="task-item">
+                        <input type="checkbox" class="task-checkbox">
+                        <div class="task-text">Subir fotos y crear primer borrador del álbum</div>
+                    </li>
+                    <li class="task-item">
+                        <input type="checkbox" class="task-checkbox">
+                        <div class="task-text">Diseñar páginas principales del álbum</div>
+                    </li>
+                    <li class="task-item">
+                        <input type="checkbox" class="task-checkbox">
+                        <div class="task-text">Definir productos para merchandising</div>
+                    </li>
+                    <li class="task-item">
+                        <input type="checkbox" class="task-checkbox">
+                        <div class="task-text">Buscar proveedores de camisetas/tazas/stickers</div>
+                    </li>
+                    <li class="task-item">
+                        <input type="checkbox" class="task-checkbox">
+                        <div class="task-text">Crear diseños iniciales para merchandising</div>
+                    </li>
+                </ul>
+                <div class="notes-section">
+                    <div class="notes-title">💡 Ideas creativas</div>
+                    <textarea class="notes-input" placeholder="Paletas de colores, conceptos, inspiración..."></textarea>
+                </div>
+            </div>
+
+            <!-- Bloque Personal -->
+            <div class="kanban-column personal-block">
+                <div class="column-header">
+                    <div class="column-icon">🏠</div>
+                    <div class="column-title">
+                        <h3>Cuidado Personal</h3>
+                        <div class="column-subtitle">60-90 min | Meta: 2-3 bloques/semana</div>
+                    </div>
+                </div>
+                <ul class="task-list">
+                    <li class="task-item">
+                        <input type="checkbox" class="task-checkbox">
+                        <div class="task-text">Guardar ropa de verano en cajas/fundas</div>
+                    </li>
+                    <li class="task-item">
+                        <input type="checkbox" class="task-checkbox">
+                        <div class="task-text">Seleccionar ropa para donar (3 bolsas)</div>
+                    </li>
+                    <li class="task-item">
+                        <input type="checkbox" class="task-checkbox">
+                        <div class="task-text">Separar ropa para vender (Vinted/Wallapop)</div>
+                    </li>
+                    <li class="task-item">
+                        <input type="checkbox" class="task-checkbox">
+                        <div class="task-text">Limpieza profunda cocina (1 sesión completa)</div>
+                    </li>
+                    <li class="task-item">
+                        <input type="checkbox" class="task-checkbox">
+                        <div class="task-text">Limpieza profunda baño</div>
+                    </li>
+                    <li class="task-item">
+                        <input type="checkbox" class="task-checkbox">
+                        <div class="task-text">Aspirar y fregar toda la casa</div>
+                    </li>
+                    <li class="task-item">
+                        <input type="checkbox" class="task-checkbox">
+                        <div class="task-text">Organizar documentos y escritorio</div>
+                    </li>
+                </ul>
+                <div class="notes-section">
+                    <div class="notes-title">🗂️ Lista de tareas 15 min</div>
+                    <textarea class="notes-input" placeholder="Tareas rápidas para días con poca energía..."></textarea>
+                </div>
+            </div>
+
+            <!-- Bloque Movimiento -->
+            <div class="kanban-column movement-block">
+                <div class="column-header">
+                    <div class="column-icon">🏃</div>
+                    <div class="column-title">
+                        <h3>Bloque Movimiento</h3>
+                        <div class="column-subtitle">30-60 min | Meta: 3-5 veces/semana</div>
+                    </div>
+                </div>
+                <ul class="task-list">
+                    <li class="task-item">
+                        <input type="checkbox" class="task-checkbox">
+                        <div class="task-text">Caminar rápido 30 min (parque o barrio)</div>
+                    </li>
+                    <li class="task-item">
+                        <input type="checkbox" class="task-checkbox">
+                        <div class="task-text">Sesión de yoga 20-30 min (YouTube/app)</div>
+                    </li>
+                    <li class="task-item">
+                        <input type="checkbox" class="task-checkbox">
+                        <div class="task-text">Entrenamiento ligero en casa (15-20 min)</div>
+                    </li>
+                    <li class="task-item">
+                        <input type="checkbox" class="task-checkbox">
+                        <div class="task-text">Paseo en bicicleta (45-60 min)</div>
+                    </li>
+                    <li class="task-item">
+                        <input type="checkbox" class="task-checkbox">
+                        <div class="task-text">Actividad al aire libre (senderismo, parque)</div>
+                    </li>
+                    <li class="task-item">
+                        <input type="checkbox" class="task-checkbox">
+                        <div class="task-text">Estiramientos diarios (10 min mañana/noche)</div>
+                    </li>
+                    <li class="task-item">
+                        <input type="checkbox" class="task-checkbox">
+                        <div class="task-text">Descanso activo domingo (paseo suave)</div>
+                    </li>
+                </ul>
+                <div class="notes-section">
+                    <div class="notes-title">💪 Seguimiento</div>
+                    <textarea class="notes-input" placeholder="Cómo te sientes, energía, motivación..."></textarea>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tips de Gestión -->
+        <div class="tips-section">
+            <div class="tips-title">
+                🧠 Tips de Gestión Semanal
+            </div>
+            <div class="tips-grid">
+                <div class="tip-card">
+                    <div class="tip-title">📋 2 Tareas Clave</div>
+                    <div class="tip-text">Una de proyecto grande + una de hogar/personal por día</div>
+                </div>
+                <div class="tip-card">
+                    <div class="tip-title">⏱️ Regla 15 Minutos</div>
+                    <div class="tip-text">Si no tienes ganas, haz solo 15 min de tareas domésticas</div>
+                </div>
+                <div class="tip-card">
+                    <div class="tip-title">🏃 Horario Fijo Deporte</div>
+                    <div class="tip-text">Mismo horario siempre (ej: antes del almuerzo)</div>
+                </div>
+                <div class="tip-card">
+                    <div class="tip-title">🔄 Revisión Dominical</div>
+                    <div class="tip-text">Ver avances, pendientes y planificar próxima semana</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Hacer las casillas funcionales
+        document.querySelectorAll('.task-checkbox').forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                const taskText = this.nextElementSibling;
+                if (this.checked) {
+                    taskText.style.textDecoration = 'line-through';
+                    taskText.style.opacity = '0.6';
+                    taskText.style.color = '#a0aec0';
+                } else {
+                    taskText.style.textDecoration = 'none';
+                    taskText.style.opacity = '1';
+                    taskText.style.color = '#4a5568';
+                }
+            });
+        });
+
+        // Destacar días al hacer clic
+        document.querySelectorAll('.day-block').forEach(day => {
+            day.addEventListener('click', function() {
+                // Remover clase active de todos
+                document.querySelectorAll('.day-block').forEach(d => d.classList.remove('active'));
+                // Añadir clase active al día clickeado
+                this.classList.add('active');
+            });
+        });
+
+        // Guardar en localStorage (para persistencia)
+        function saveProgress() {
+            const checkboxes = document.querySelectorAll('.task-checkbox');
+            const priorities = document.querySelectorAll('.priority-input');
+            const notes = document.querySelectorAll('.notes-input');
+            
+            const data = {
+                checkboxes: Array.from(checkboxes).map(cb => cb.checked),
+                priorities: Array.from(priorities).map(p => p.value),
+                notes: Array.from(notes).map(n => n.value)
+            };
+            
+            localStorage.setItem('weeklyOrganizer', JSON.stringify(data));
+        }
+
+        // Cargar progreso guardado
+        function loadProgress() {
+            const saved = localStorage.getItem('weeklyOrganizer');
+            if (saved) {
+                const data = JSON.parse(saved);
+                
+                const checkboxes = document.querySelectorAll('.task-checkbox');
+                const priorities = document.querySelectorAll('.priority-input');
+                const notes = document.querySelectorAll('.notes-input');
+                
+                checkboxes.forEach((cb, i) => {
+                    if (data.checkboxes[i]) {
+                        cb.checked = true;
+                        cb.dispatchEvent(new Event('change'));
+                    }
+                });
+                
+                priorities.forEach((p, i) => {
+                    if (data.priorities[i]) {
+                        p.value = data.priorities[i];
+                    }
+                });
+                
+                notes.forEach((n, i) => {
+                    if (data.notes[i]) {
+                        n.value = data.notes[i];
+                    }
+                });
+            }
+        }
+
+        // Event listeners para auto-guardar
+        document.addEventListener('change', saveProgress);
+        document.addEventListener('input', saveProgress);
+
+        // Cargar al inicio
+        window.addEventListener('load', loadProgress);
+
+        // Función para limpiar todo
+        function resetWeek() {
+            if (confirm('¿Quieres limpiar toda la semana y empezar de nuevo?')) {
+                localStorage.removeItem('weeklyOrganizer');
+                location.reload();
+            }
+        }
+
+        // Añadir botón reset (opcional)
+        const header = document.querySelector('.header p');
+        header.innerHTML += ' | <span onclick="resetWeek()" style="cursor: pointer; text-decoration: underline;">🔄 Nueva Semana</span>';
+    </script>
+</body>
+</html>
